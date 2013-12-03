@@ -7,11 +7,12 @@
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
       <!-- Optional theme -->
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+      <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+      <link href="css/bootstrap-select.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/theme.css" rel="stylesheet">
       <link href="css/grid.css" rel="stylesheet">
-      <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-      <link href="css/bootstrap-select.min.css" rel="stylesheet">
+      
    </head>
    <body>
       <div class="container theme-showcase">
@@ -24,7 +25,7 @@
          </div>
          <h3>Search Criteria</h3>
          <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                <div class="panel panel-default">
                   <div class="panel-heading">
                      <h3 class="panel-title">Select a DBO Line</h3>
@@ -45,7 +46,7 @@
                   </div>
                   <div class="panel-body">
                      <select id="chief_sci" class="selectpicker" data-live-search="true" >
-                        <option value='0'></option>
+                        <option value='0'>Any</option>
                         <option value='Bob'>Bob</option>
                         <option value='Sue'>Sue</option>
                         <option value='Adam'>Adam</option>
@@ -58,7 +59,7 @@
                   </div>
                   <div class="panel-body">
                      <select id="vessel" class="selectpicker" data-live-search="true" >
-                        <option value='0'></option>
+                        <option value='0'>Any</option>
                         <option value='Healy'>Healy</option>
                         <option value='Knorr'>Knorr</option>
                         <option value='JCR'>JCR</option>
@@ -71,7 +72,7 @@
                   </div>
                   <div class="panel-body">
                      <select id = "cruise_id" class="selectpicker" data-live-search="true" >
-                        <option value='0'></option>
+                        <option value='0'>Any</option>
                         <option value='AE1213'>AE1213</option>
                         <option value='JCR1255'>JCR1255</option>
                         <option value='JCR1255'>HLY1303</option>
@@ -88,54 +89,37 @@
                   </div>
                </div>
             </div>
-            <div class="col-md-8">
-               <div class="panel panel-info">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Map of Cruise Distro</h3>
-                  </div>
-                  <div class="panel-body">
-                     
-                     <h2>Greetings</h2>
-<div class="container">
-  <div class="inner">
-    Hello
-  </div>
-  <div class="inner">
-    Goodbye
-  </div>
-</div>
-                  </div>
-               </div>
-               
-            </div>
+           
             
-            <div class="col-md-8">
+            <div class="col-md-9" id="right_panel">
                <div class="panel panel-info">
                   <div class="panel-heading">
                      <h3 class="panel-title">Cruise Results</h3>
                   </div>
                   <div class="panel-body">
                      <div class="list-group">
-                        <a href="#" class="list-group-item ">
-                           <h4 class="list-group-item-heading">KN203</h4>
-                           <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                           <h4 class="list-group-item-heading">JCR2003</h4>
-                           <p><strong>Vessel:</strong> KNORR</p>
-                           <p><strong>Dates:</strong> Jan-Dec</p>
-                           <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        </a>
-                        <a href="#" class="list-group-item">
-                           <h4 class="list-group-item-heading">AE1213</h4>
-                           <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        </a>
+                       <div class="alert alert-warning">
+        <strong>Warning!</strong> Best check yo self, you're not looking too good.
+      </div>
                      </div>
                   </div>
                </div>
-               <a class ="btn btn-default" href="#" role ="button"> Get Data! </a>
+               <button type="button" class="btn btn-lg btn-success">Download Data for Selected Cruises</button>
             </div>
+            
+            
          </div>
+         
+             <div class="row">
+            <div class="col-md-12">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">DBO Cruise Occupations</h3>
+                  </div>
+                  <div class="panel-body">
+                    
+                  </div>
+               </div>
       </div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

@@ -13,6 +13,12 @@ body {
   margin: 5px 0;
 }
 
-*.alert {
-  display:none ;
+#right_panel{
+	overflow: scroll;
+    height: 837px;
+}
+
+.btn-lg{
+	height:50px;
+	font-size:20px;
 }
