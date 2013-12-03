@@ -1,67 +1,50 @@
 // JavaScript Document
  
+ var cruiseData = [{"vessel":"Knorr","chief_sci":"Bob ","DBO":"1","cruise_id":"AE1213"},
+ {"vessel":"JCR","chief_sci":"Sue ","DBO":"2","cruise_id":"JCR1255"},
+ {"vessel":"Healy","chief_sci":"Adam ","DBO":"3","cruise_id":"HLY1303"}];
+ 
+ 
+ 
             /*-------------------------------------------------------------------------------------------------
             Listeners
             -------------------------------------------------------------------------------------------------*/
-            $('button').click(calculate);
-            $('input,select').change(calculate);
+                $('select').change(filter);
 			
-			/*-------------------------------------------------------------------------------------------------
-Recipient
--------------------------------------------------------------------------------------------------*/
-$('#cruise_id').keyup(function() {
 
-	// Figure out what the user typed in
-	var cruiseId = $(this).val();
-	
-	
-	// How long was the recipient?
-	var length = cruiseId.length;
-	
-	// If it was 7 characters, that's the max, so inject an error message
-	if(length == 6) {
-		$('#cruise_id_error').html("Cruise Ids have a maximum of 6 characters!");
-		$('#cruise_id_error').css('display','block');
-		
-	}
-	// Otherwise, hide the error msg
-	else {
-		$('#cruise_id_error').css('display','none');
-	}
-	
-	// Note: The "maxlength" attribute on the HTML element will prevent the user from entering more than 14 characters
-	// <input type='text' id='recipient' maxlength="14"> 
-	
+			 
+            function filter() {
+				
+            	var vessel   = $('#vessel').val();
+				var dbo = $('#vessel').val();
+				
+				var data = $.grep(cruiseData, function (e) {
+    			return e.vessel === vessel 
 });
 
+			//Clear list of result cruises
+			$('.list-group').html("");
 			
-
-
-            /*-------------------------------------------------------------------------------------------------
-            
-            -------------------------------------------------------------------------------------------------*/
-            function calculate() {
-				
-            	var budget   = $('#budget').val();
-            	var rooms    = $('#room_count').val();
-            	var services = $('input[name=services]:checked');
-            	var total    = 0;
-				
-				//$('.alert').css('color', 'black');
-				//$('.alert').css('display','none');
-            
-            	
-            	services.each(function() {
+			//Cycle through each cruise that passed the filter and insert list element
+			$.each(data,function(e) {
             		
-            		var price = $(this).val();
-            		
-            		var amount = price * rooms;
-            		
-            		total = total + amount;
+            		$('.list-group').append('<a href=\"#\" class=\"list-group-item \"> \
+					<h4 class=\"list-group-item-heading\">' + data[e].vessel + '</h4>\
+					 <p class=\"list-group-item-text\">\
+					 Chief Scientist: ' + data[e].chief_sci + '\
+					 </p> </a>');
+					
+					console.log(e)
+					
+					
             		
             	}); // end of loop
+				
             	
-            	$('#output').html(total);
+            //console.log(data[0].chief_sci);
+			
+			
+						
             	
             }
             
