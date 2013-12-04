@@ -28,12 +28,15 @@
                which will use php and a mysql database to access the cruise database information. 
             </p>
          </div>
-         <h3>Search Criteria</h3>
+         <h3>Search Criteria </h3>  
          <div class="row">
             <div class="col-md-3">
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Select a DBO Line</h3>
+                     <h3 class="panel-title">Select a DBO Line
+                      <span class="glyphicon glyphicon-minus"></span> 
+                      <span class="glyphicon glyphicon-minus"></span> </h3>
+                     
                   </div>
                   <div class="panel-body">
                      <select id="dbo" class="selectpicker" multiple >
@@ -47,7 +50,10 @@
                </div>
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Select a Chief Scientist</h3>
+                     <h3 class="panel-title">Select a Chief Scientist
+                      <span class="glyphicon glyphicon-user"></span> 
+                      
+                      </h3> 
                   </div>
                   <div class="panel-body">
                      <select id="chief_sci" class="selectpicker" data-live-search="true" >
@@ -57,7 +63,8 @@
                </div>
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Select a Vessel</h3>
+                     <h3 class="panel-title">Select a Vessel
+                     <span class="glyphicon glyphicon-plane"></span></h3>
                   </div>
                   <div class="panel-body">
                      <select id="vessel" class="selectpicker" data-live-search="true" >
@@ -67,7 +74,8 @@
                </div>
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Enter a Cruise Id</h3>
+                     <h3 class="panel-title">Enter a Cruise Id
+                     <span class="glyphicon glyphicon-text-height"></span></h3>
                   </div>
                   <div class="panel-body">
                      <select id = "cruise_id" class="selectpicker" data-live-search="true" >
@@ -78,7 +86,8 @@
                
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Select a Year</h3>
+                     <h3 class="panel-title">Select a Year
+                     <span class="glyphicon glyphicon-send"></span></h3>
                   </div>
                   <div class="panel-body">
                      <select id = "year" class="selectpicker" data-live-search="true" >
@@ -115,7 +124,7 @@
             
          </div>
          
-             <div class="row">
+            <!-- <div class="row">
             <div class="col-md-12">
                <div class="panel panel-default">
                   <div class="panel-heading">
@@ -127,7 +136,7 @@
                     
                   </div>
                </div>
-      </div>
+      </div>-->
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <script src="js/data.js"></script>

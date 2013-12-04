@@ -22,3 +22,20 @@ body {
 	height:50px;
 	font-size:20px;
 }
+
+/*.glyphicon{
+	padding-left:10px;
+	width:30px;
+}*/
+
+.remove{
+	float:right;
+	width:120px;
+		
+}
+
+.get_data{
+	padding-top:10px;
+		
+}
+
