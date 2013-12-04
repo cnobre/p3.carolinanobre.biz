@@ -6,8 +6,11 @@ create_menu(cruiseData, 'vessel');
 create_menu(cruiseData, 'cruise_id');
 create_menu(cruiseData, 'year');
 
-//Apply filters to populate cruise results panel on the right
-filter();
+//Apply filters to populate cruise results panel and bottom time series plot
+//filter();
+
+//Generate empty heat map
+heat_map(cruiseData);
 
 /*-------------------------------------------------------------------------------------------------
 Listeners          -------------------------------------------------------------------------------------------------*/
@@ -38,7 +41,6 @@ function create_menu(data, menu) {
 /*-------------------------------------------------------------------------------------------------
  Functions to add/remove "Download Data" button when user hovers over a cruise           -------------------------------------------------------------------------------------------------*/
 function hover_on() {
-    console.log('called hover function');
     $(this).append('<div class = "get_data">\
 	<span> <button type="button" class="btn btn-success">Get Cruise Data</button></span></div>');
 };
@@ -129,9 +131,71 @@ function filter() {
 		<div class=\"alert alert-warning\"> \
         <strong>Oops!</strong> It seems no \
 		cruises match your search criteria! Please try again!</div>')
+		return;
     };
 
+//Creating heat map plot
+heat_map(data)
+};
 
 
+/*-------------------------------------------------------------------------------------------------
+ Function to create heat map of DBO occupation            -------------------------------------------------------------------------------------------------*/
+function heat_map(data){
+//create time series JSON array from filtered data
+var filtered = JSON.stringify(data, ['year','month']);
+var timeseries =$.parseJSON(filtered);	
+var timeseriesUNIX=[];
+var timeseriesJSON={};
+//transform times to unix time stamps and parse into JSON format
+$.each(timeseries,function(a){
+	timeseriesUNIX[a]= (new Date(timeseries[a].year,timeseries[a].month).getTime());
+	
+	//adding to JSON array
+	if (timeseriesJSON.hasOwnProperty(timeseriesUNIX[a])){
+		++timeseriesJSON[timeseriesUNIX[a]];
+	}
+	else{
+		timeseriesJSON[timeseriesUNIX[a]]=1;	
+	}
+	
+	});
+	
+	timeseriesJSON = JSON.stringify(timeseriesJSON);
+	console.log(timeseriesJSON);
+	
 
-}
+//Create Time Series Plot
+$('#time_series').html(function(timeseriesJSON){
+	//removing old heatmap if there is one
+	$(this).find("svg:first").remove();  
+	
+	//creating new heatmap
+	var cal = new CalHeatMap();
+	cal.init({
+		itemSelector: "#time_series",
+		itemName: ['time'],
+		verticalOrientation: true,
+		domain: "year",
+		subDomain: "month",
+		cellRadius:3,
+		data: timeseriesJSON,
+		start: new Date(2010,0),
+		cellSize: 41,
+		//subDomainTitleFormat:"filled",
+		range: 4,
+		subDomainTextFormat: "%b",
+		legend: [1, 3, 5, 7],
+		legendVerticalPosition: "top",
+		legendHorizontalPosition: "center",
+		legendCellSize: 25,
+		legendMargin: [0, 0, 30, 0],
+		legendCellPadding:8,
+		label: {
+			height: 60
+		}
+	});
+		
+});
+
+};

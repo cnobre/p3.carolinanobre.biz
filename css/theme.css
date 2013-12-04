@@ -13,9 +13,9 @@ body {
   margin: 5px 0;
 }
 
-#right_panel{
+.col-md-3, .col-md-4, .col-md-6{
 	overflow: scroll;
-    height: 797px;
+    height: 800px;
 }
 
 .btn-lg{
@@ -38,4 +38,16 @@ body {
 	padding-top:10px;
 		
 }
+
+#time_series_title{
+	height:150px;
+	padding:20px;
+	margin:10px;
+}
+
+.subdomain-text{
+	font-size:15px;
+}
+
+
 
