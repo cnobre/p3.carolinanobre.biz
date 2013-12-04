@@ -2,6 +2,11 @@
 <html>
    <head>
       <title>Cruise Search</title>
+      
+       <script src="http://d3js.org/d3.v3.min.js"></script>
+   
+          
+    
       <link rel="stylesheet" href="" type="text/css">
       <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
@@ -47,9 +52,6 @@
                   <div class="panel-body">
                      <select id="chief_sci" class="selectpicker" data-live-search="true" >
                         <option value='0'>Any</option>
-                        <option value='Bob'>Bob</option>
-                        <option value='Sue'>Sue</option>
-                        <option value='Adam'>Adam</option>
                      </select>
                   </div>
                </div>
@@ -60,9 +62,6 @@
                   <div class="panel-body">
                      <select id="vessel" class="selectpicker" data-live-search="true" >
                         <option value='0'>Any</option>
-                        <option value='Healy'>Healy</option>
-                        <option value='Knorr'>Knorr</option>
-                        <option value='JCR'>JCR</option>
                      </select>
                   </div>
                </div>
@@ -72,14 +71,22 @@
                   </div>
                   <div class="panel-body">
                      <select id = "cruise_id" class="selectpicker" data-live-search="true" >
-                        <option value='0'>Any</option>
-                        <option value='AE1213'>AE1213</option>
-                        <option value='JCR1255'>JCR1255</option>
-                        <option value='JCR1255'>HLY1303</option>
+                        <option value='0'>Any</option>                        
                      </select>
                   </div>
                </div>
+               
                <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Select a Year</h3>
+                  </div>
+                  <div class="panel-body">
+                     <select id = "year" class="selectpicker" data-live-search="true" >
+                        <option value='0'>Any</option>                        
+                     </select>
+                  </div>
+               </div>
+             <!--<div class="panel panel-default">
                   <div class="panel-heading">
                      <h3 class="panel-title">Select Desired Parameters</h3>
                   </div>
@@ -87,24 +94,22 @@
                      <input type='checkbox' name='bio_params'> Biological Parameters Sampled<br><br>
                      <input type='checkbox' name='bio_params'> Water Samples Taken<br><br>
                   </div>
-               </div>
+               </div>-->
             </div>
            
             
             <div class="col-md-9" id="right_panel">
-               <div class="panel panel-info">
+               <div class="panel panel-info ">
                   <div class="panel-heading">
                      <h3 class="panel-title">Cruise Results</h3>
                   </div>
                   <div class="panel-body">
                      <div class="list-group">
-                       <div class="alert alert-warning">
-        <strong>Warning!</strong> Best check yo self, you're not looking too good.
-      </div>
+                       
                      </div>
                   </div>
                </div>
-               <button type="button" class="btn btn-lg btn-success">Download Data for Selected Cruises</button>
+               <!--<button type="button" class="btn btn-lg btn-success">Download Data for Selected Cruises</button>-->
             </div>
             
             
@@ -114,18 +119,22 @@
             <div class="col-md-12">
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">DBO Cruise Occupations</h3>
+                     <h3 class="panel-title">Selected Cruises Graph</h3>
                   </div>
                   <div class="panel-body">
+                    
+                  
                     
                   </div>
                </div>
       </div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script src="js/dbo.js"></script>
+      <script src="js/data.js"></script>
+	  <script src="js/dbo.js"></script>
       <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
       <script src="http://silviomoreto.github.io/bootstrap-select/javascripts/bootstrap-select.js"></script>
+      
       <script type="text/javascript">
          $(document).ready(function(e) {
              $('.selectpicker').selectpicker();
