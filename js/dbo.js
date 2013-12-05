@@ -1,9 +1,13 @@
 // JavaScript Document
-//Create menu items based on data content
+
+//Populate html by creating menu items based on data content
 create_menu(cruiseData, 'chief_sci');
 create_menu(cruiseData, 'vessel');
 create_menu(cruiseData, 'cruise_id');
 create_menu(cruiseData, 'year');
+
+//create empty variable to hold calendar on the right panel;
+var cal
 
 //Apply filters to populate cruise results panel and data density calendar
 filter();
@@ -56,6 +60,17 @@ function click_on() {
 /*-------------------------------------------------------------------------------------------------
  Function to filter cruise results by user selected values            -------------------------------------------------------------------------------------------------*/
 function filter() {
+	
+	//getting values selected by user from dropdown menus
+    var vessel = $('#vessel').val();
+    var dbo = $('#dbo').val();
+    var chief_sci = $('#chief_sci').val();
+    var cruise_id = $('#cruise_id').val();
+    var year = $('#year').val();
+
+    //copying original data array w/ all cruises
+    var data = cruiseData;
+
 
     //helper function that filters by any single parameter 
     function filter_by(data, parameter) {
@@ -68,18 +83,7 @@ function filter() {
         }
         return data;
     };
-
-
-    //getting values selected by user from dropdown menus
-    var vessel = $('#vessel').val();
-    var dbo = $('#dbo').val();
-    var chief_sci = $('#chief_sci').val();
-    var cruise_id = $('#cruise_id').val();
-    var year = $('#year').val();
-
-    //copying original data array w/ all cruises
-    var data = cruiseData;
-
+    
     //Parsing out first menu, which can have more than one item selected
 
     if (dbo != null) {
@@ -132,15 +136,15 @@ function filter() {
 
     };
 
-    //Create heat map plot
-    var cal = heat_map(data);
-};
+    //Create/update heat map plot
+    cal = heat_map(data);
+	
+};  
 
 
 /*-------------------------------------------------------------------------------------------------
  Function to create heat map of DBO occupation            -------------------------------------------------------------------------------------------------*/
 function heat_map(data) {
-    
     //create time series JSON array from filtered data
     var filtered = JSON.stringify(data, ['year', 'month']);
     var timeseries = $.parseJSON(filtered);
@@ -166,11 +170,10 @@ function heat_map(data) {
 
     //Create Time Series Plot
     $('#time_series').html(function () {
-        //removing old heatmap if there is one
-        $(this).find("svg:first").remove();
-
+		//if no calendar exists, create a new one
+        if (cal == undefined){
         //creating new heatmap
-        var cal = new CalHeatMap();
+        cal = new CalHeatMap();
         cal.init({
             itemSelector: "#time_series",
             itemName: ['time'],
@@ -195,9 +198,16 @@ function heat_map(data) {
             }
 
         });
+		
+		}
+		//update existing calendar w/ new data
+		else{
+		cal.update(timeseriesJSON);
 
-
-
+		};
+		
+	
     });
-
+		return cal; 
+	
 };
