@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Cruise Search</title>
       <script src="http://d3js.org/d3.v3.min.js"></script>
       <!-- Heat Map files -->
@@ -121,6 +122,8 @@
             </div>
          </div>
       </div>
+      </div>
+      
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <script src="js/data.js"></script>
