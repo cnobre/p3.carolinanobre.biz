@@ -1,5 +1,4 @@
 // JavaScript Document
-
 //Create menu items based on data content
 create_menu(cruiseData, 'chief_sci');
 create_menu(cruiseData, 'vessel');
@@ -9,18 +8,15 @@ create_menu(cruiseData, 'year');
 //Apply filters to populate cruise results panel and data density calendar
 filter();
 
-//Generate intial heat map w/ all data
-//cal = heat_map(cruiseData);
-
 /*-------------------------------------------------------------------------------------------------
 Listeners for any changes in the filter criteria         
 -------------------------------------------------------------------------------------------------*/
 $('select').change(filter);
 
-
 /*-------------------------------------------------------------------------------------------------
- Function to dynamically create menu items from data            -------------------------------------------------------------------------------------------------*/
-				
+ Function to dynamically create menu items from data           
+ -------------------------------------------------------------------------------------------------*/
+
 function create_menu(data, menu) {
     //find unique values for a given key
     var unique = {};
@@ -52,7 +48,7 @@ function hover_off() {
 
 /*-------------------------------------------------------------------------------------------------
  Function to get data when user clicks on "get data" button . Not functional but will be in P4.         -------------------------------------------------------------------------------------------------*/
- 
+
 function click_on() {
     console.log('called click function');
 };
@@ -60,8 +56,8 @@ function click_on() {
 /*-------------------------------------------------------------------------------------------------
  Function to filter cruise results by user selected values            -------------------------------------------------------------------------------------------------*/
 function filter() {
-	
-	//helper function that filters by any single parameter 
+
+    //helper function that filters by any single parameter 
     function filter_by(data, parameter) {
         //Make sure parameter is not empty
         if (eval(parameter) != 0 & eval(parameter) != null) {
@@ -72,9 +68,9 @@ function filter() {
         }
         return data;
     };
-	
-		
-	//getting values selected by user from dropdown menus
+
+
+    //getting values selected by user from dropdown menus
     var vessel = $('#vessel').val();
     var dbo = $('#dbo').val();
     var chief_sci = $('#chief_sci').val();
@@ -101,14 +97,12 @@ function filter() {
         data = line;
     }
 
-	  
-	
-	//filter the data cummulatively with each of the criteria
+    //filter the data cummulatively with each of the criteria
     data = filter_by(data, "chief_sci");
     data = filter_by(data, "cruise_id");
     data = filter_by(data, "vessel");
     data = filter_by(data, "year");
-	
+
     //Clear list of result cruises
     $('.list-group').html("");
 
@@ -129,85 +123,81 @@ function filter() {
     $(".list-group-item").hover(hover_on, hover_off);
     $('.get_data').click(click_on);
 
-
+	//display error msg if no cruises match the criteria
     if (data.length == 0) {
         $('.list-group').html('\
 		<div class=\"alert alert-warning\"> \
         <strong>Oops!</strong> It seems no \
 		cruises match your search criteria! Please try again!</div>')
-		
+
     };
 
-//Create/update heat map plot
-var cal = heat_map(data);
+    //Create heat map plot
+    var cal = heat_map(data);
 };
 
 
 /*-------------------------------------------------------------------------------------------------
  Function to create heat map of DBO occupation            -------------------------------------------------------------------------------------------------*/
-function heat_map(data){
-	console.log ('creating heat map');
-//create time series JSON array from filtered data
-var filtered = JSON.stringify(data, ['year','month']);
-var timeseries =$.parseJSON(filtered);	
-var timeseriesUNIX=[];
-var timeseriesJSON={};
-//transform times to unix time stamps and parse into JSON format
-$.each(timeseries,function(a){
-	timeseriesUNIX[a]= (new Date(timeseries[a].year,timeseries[a].month-1).getTime()/1000);
+function heat_map(data) {
+    
+    //create time series JSON array from filtered data
+    var filtered = JSON.stringify(data, ['year', 'month']);
+    var timeseries = $.parseJSON(filtered);
+    var timeseriesUNIX = [];
+    var timeseriesJSON = {};
 	
-	//adding to JSON array
-	if (timeseriesJSON.hasOwnProperty(timeseriesUNIX[a])){
-		++timeseriesJSON[timeseriesUNIX[a]];
-	}
-	else{
-		timeseriesJSON[timeseriesUNIX[a]]=1;	
-	}
-	
-	});
-	
-	timeseriesJSON = JSON.stringify(timeseriesJSON);
-	timeseriesJSON =$.parseJSON(timeseriesJSON);
-	
+    //transform times to unix time stamps and parse into JSON format
+    $.each(timeseries, function (a) {
+        timeseriesUNIX[a] = (new Date(timeseries[a].year, timeseries[a].month - 1).getTime() / 1000);
 
-//Create Time Series Plot
-$('#time_series').html(function(){
+        //adding to JSON array
+        if (timeseriesJSON.hasOwnProperty(timeseriesUNIX[a])) {
+            ++timeseriesJSON[timeseriesUNIX[a]];
+        } else {
+            timeseriesJSON[timeseriesUNIX[a]] = 1;
+        }
+
+    });
+
+    timeseriesJSON = JSON.stringify(timeseriesJSON);
+    timeseriesJSON = $.parseJSON(timeseriesJSON);
+
+
+    //Create Time Series Plot
+    $('#time_series').html(function () {
         //removing old heatmap if there is one
-        $(this).find("svg:first").remove();  
-        
+        $(this).find("svg:first").remove();
+
         //creating new heatmap
-		
-		 //if ($(".cal-heatmap-container").length ==0){
-		//console.log('create new map');
-	//creating new heatmap
-	var cal = new CalHeatMap();
-	cal.init({
-		itemSelector: "#time_series",
-		itemName: ['time'],
-		verticalOrientation: true,
-		domain: "year",
-		subDomain: "month",
-		cellRadius:3,
-		data:timeseriesJSON,
-		animationDuration: 0,
-		start: new Date(2010,0),
-		cellSize: 40,
-		range: 5,
-		subDomainTextFormat: "%b",
-		legend: [1, 3, 5, 7],
-		legendVerticalPosition: "top",
-		legendHorizontalPosition: "center",
-		legendCellSize: 25,
-		legendMargin: [0, 0, 30, 0],
-		legendCellPadding:8,
-		label: {
-			height: 55
-		}
-	
-	});
-	 
-	
-		
-});
+        var cal = new CalHeatMap();
+        cal.init({
+            itemSelector: "#time_series",
+            itemName: ['time'],
+            verticalOrientation: true,
+            domain: "year",
+            subDomain: "month",
+            cellRadius: 10,
+            data: timeseriesJSON,
+            animationDuration: 0,
+            start: new Date(2010, 0),
+            cellSize: 40,
+            range: 5,
+            subDomainTextFormat: "%b",
+            legend: [1, 3, 5, 7],
+            legendVerticalPosition: "top",
+            legendHorizontalPosition: "center",
+            legendCellSize: 25,
+            legendMargin: [0, 0, 30, 0],
+            legendCellPadding: 8,
+            label: {
+                height: 55
+            }
+
+        });
+
+
+
+    });
 
 };
