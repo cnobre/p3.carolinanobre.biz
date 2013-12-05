@@ -6,14 +6,15 @@ create_menu(cruiseData, 'vessel');
 create_menu(cruiseData, 'cruise_id');
 create_menu(cruiseData, 'year');
 
-//Apply filters to populate cruise results panel and bottom time series plot
-//filter();
+//Apply filters to populate cruise results panel and data density calendar
+filter();
 
-//Generate empty heat map
-heat_map(cruiseData);
+//Generate intial heat map w/ all data
+//cal = heat_map(cruiseData);
 
 /*-------------------------------------------------------------------------------------------------
-Listeners          -------------------------------------------------------------------------------------------------*/
+Listeners for any changes in the filter criteria         
+-------------------------------------------------------------------------------------------------*/
 $('select').change(filter);
 
 
@@ -50,7 +51,7 @@ function hover_off() {
 };
 
 /*-------------------------------------------------------------------------------------------------
- Function to get data when user clicks on "get data" button . Not functional but will in P4.         -------------------------------------------------------------------------------------------------*/
+ Function to get data when user clicks on "get data" button . Not functional but will be in P4.         -------------------------------------------------------------------------------------------------*/
  
 function click_on() {
     console.log('called click function');
@@ -84,6 +85,7 @@ function filter() {
     var data = cruiseData;
 
     //Parsing out first menu, which can have more than one item selected
+
     if (dbo != null) {
         for (var i = 0; i < dbo.length; i++) {
             if (i == 0) {
@@ -97,7 +99,9 @@ function filter() {
             }
         }
         data = line;
-    };  
+    }
+
+	  
 	
 	//filter the data cummulatively with each of the criteria
     data = filter_by(data, "chief_sci");
@@ -117,7 +121,7 @@ function filter() {
 					 <strong>Chief Scientist</strong>: ' + data[e].chief_sci + '</br>\
 					 <strong>Vessel</strong>: ' + data[e].vessel + '</br>\
 					 <strong>DBO Line</strong>: ' + data[e].dbo + '</br>\
-					 <strong>Year</strong>: ' + data[e].year + '</br>\
+					 <strong>Date</strong>: ' + data[e].month + ' / ' + data[e].year + '</br>\
 					 </p> </a>');
     }); // end of loop
 
@@ -131,17 +135,18 @@ function filter() {
 		<div class=\"alert alert-warning\"> \
         <strong>Oops!</strong> It seems no \
 		cruises match your search criteria! Please try again!</div>')
-		return;
+		
     };
 
-//Creating heat map plot
-heat_map(data)
+//Create/update heat map plot
+var cal = heat_map(data);
 };
 
 
 /*-------------------------------------------------------------------------------------------------
  Function to create heat map of DBO occupation            -------------------------------------------------------------------------------------------------*/
 function heat_map(data){
+	console.log ('creating heat map');
 //create time series JSON array from filtered data
 var filtered = JSON.stringify(data, ['year','month']);
 var timeseries =$.parseJSON(filtered);	
@@ -149,7 +154,7 @@ var timeseriesUNIX=[];
 var timeseriesJSON={};
 //transform times to unix time stamps and parse into JSON format
 $.each(timeseries,function(a){
-	timeseriesUNIX[a]= (new Date(timeseries[a].year,timeseries[a].month).getTime());
+	timeseriesUNIX[a]= (new Date(timeseries[a].year,timeseries[a].month-1).getTime()/1000);
 	
 	//adding to JSON array
 	if (timeseriesJSON.hasOwnProperty(timeseriesUNIX[a])){
@@ -162,14 +167,18 @@ $.each(timeseries,function(a){
 	});
 	
 	timeseriesJSON = JSON.stringify(timeseriesJSON);
-	console.log(timeseriesJSON);
+	timeseriesJSON =$.parseJSON(timeseriesJSON);
 	
 
 //Create Time Series Plot
-$('#time_series').html(function(timeseriesJSON){
-	//removing old heatmap if there is one
-	$(this).find("svg:first").remove();  
-	
+$('#time_series').html(function(){
+        //removing old heatmap if there is one
+        $(this).find("svg:first").remove();  
+        
+        //creating new heatmap
+		
+		 //if ($(".cal-heatmap-container").length ==0){
+		//console.log('create new map');
 	//creating new heatmap
 	var cal = new CalHeatMap();
 	cal.init({
@@ -179,11 +188,11 @@ $('#time_series').html(function(timeseriesJSON){
 		domain: "year",
 		subDomain: "month",
 		cellRadius:3,
-		data: timeseriesJSON,
+		data:timeseriesJSON,
+		animationDuration: 0,
 		start: new Date(2010,0),
-		cellSize: 41,
-		//subDomainTitleFormat:"filled",
-		range: 4,
+		cellSize: 40,
+		range: 5,
 		subDomainTextFormat: "%b",
 		legend: [1, 3, 5, 7],
 		legendVerticalPosition: "top",
@@ -192,9 +201,12 @@ $('#time_series').html(function(timeseriesJSON){
 		legendMargin: [0, 0, 30, 0],
 		legendCellPadding:8,
 		label: {
-			height: 60
+			height: 55
 		}
+	
 	});
+	 
+	
 		
 });
 

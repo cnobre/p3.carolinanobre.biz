@@ -36,7 +36,7 @@
                   </h3>
                </div>
                <div class="panel-body">
-                  <select id="dbo" class="selectpicker" multiple >
+                  <select id="dbo" class="selectpicker" multiple title="All DBO Lines" >
                      <option value ='1'>DBO 1</option>
                      <option value ='2'>DBO 2</option>
                      <option value ='3'>DBO 3</option>
@@ -93,18 +93,10 @@
                   </select>
                </div>
             </div>
-            <!--<div class="panel panel-default">
-               <div class="panel-heading">
-                  <h3 class="panel-title">Select Desired Parameters</h3>
-               </div>
-               <div class="panel-body">
-                  <input type='checkbox' name='bio_params'> Biological Parameters Sampled<br><br>
-                  <input type='checkbox' name='bio_params'> Water Samples Taken<br><br>
-               </div>
-               </div>-->
+
          </div>
          <div class="col-md-3" id="right_panel">
-            <div class="panel panel-info ">
+            <div class="panel panel-default ">
                <div class="panel-heading">
                   <h3 class="panel-title">Cruise Results</h3>
                </div>
@@ -121,10 +113,12 @@
            <div class="panel panel-default" >
            
            <div class="page-header" id="time_series_title">
-  <h2>Number of DBO occupations <br><small>a heatmap of selected cruises</small></h2>
+  <h2>Density of DBO occupations <br><small>mouse over a month to see the no. of occupations </small></h2>
 </div>
               <div class="panel-body" id="time_series" >
+              
               </div>
+             
            </div>
         </div>
       </div>
