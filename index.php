@@ -122,10 +122,12 @@
          </div>
       </div>
       
-      <div class = "well"> Features to implement for P4: <br>
+      <div class = "well"> Features to implement for P4: 
+      <ul>
       <li>The functionality of the "Get Cruise Data" buttons (get data from server) </li>
       <li>Store data in SQL database instead of data.js file</li>
-      <li> Ability to submit data as well as retrieve data</li>  
+      <li> Ability to submit data as well as retrieve data</li> 
+      </ul> 
        </div>
       </div>
       
