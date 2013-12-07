@@ -13,7 +13,7 @@ var cruiseData = [{
 	"year":"2011",
 	"month":"8"
 }, {
-    "vessel": "Westward Wind",
+    "vessel": "Westward_Wind",
     "chief_sci": "Bob_Day",
     "dbo": "3",
     "cruise_id": "AE1213",
@@ -56,7 +56,7 @@ var cruiseData = [{
 	"year":"2011",
 	"month":"8"
 }, {
-    "vessel": "Westward Wind",
+    "vessel": "Westward_Wind",
     "chief_sci": "Bob_Day",
     "dbo": "3",
     "cruise_id": "C30",
