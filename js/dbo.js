@@ -40,7 +40,8 @@ function create_menu(data, menu) {
 }
 
 /*-------------------------------------------------------------------------------------------------
- Functions to add/remove "Download Data" button when user hovers over a cruise           -------------------------------------------------------------------------------------------------*/
+ Functions to add/remove "Download Data" button when user hovers over a cruise          
+-------------------------------------------------------------------------------------------------*/
 function hover_on() {
     $(this).append('<div class = "get_data">\
 	<span> <button type="button" class="btn btn-success">Get Cruise Data</button></span></div>');
@@ -51,14 +52,16 @@ function hover_off() {
 };
 
 /*-------------------------------------------------------------------------------------------------
- Function to get data when user clicks on "get data" button . Not functional but will be in P4.         -------------------------------------------------------------------------------------------------*/
+ Function to get data when user clicks on "get data" button . Not functional but will be in P4.        
+  -------------------------------------------------------------------------------------------------*/
 
 function click_on() {
     console.log('called click function');
 };
 
 /*-------------------------------------------------------------------------------------------------
- Function to filter cruise results by user selected values            -------------------------------------------------------------------------------------------------*/
+ Function to filter cruise results by user selected values            
+ -------------------------------------------------------------------------------------------------*/
 function filter() {
 	
 	//getting values selected by user from dropdown menus
@@ -143,7 +146,8 @@ function filter() {
 
 
 /*-------------------------------------------------------------------------------------------------
- Function to create heat map of DBO occupation            -------------------------------------------------------------------------------------------------*/
+ Function to create heat map of DBO occupation            
+ -------------------------------------------------------------------------------------------------*/
 function heat_map(data) {
     //create time series JSON array from filtered data
     var filtered = JSON.stringify(data, ['year', 'month']);

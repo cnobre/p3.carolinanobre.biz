@@ -20,12 +20,11 @@
    <body>
       <div class="container theme-showcase">
       <!-- Header -->
-      <!--<div class="jumbotron">
-         <h2>DBO Cruise Finder</h2>
-         <p>This is the Cruise Finder for the DBO website. I plan on incorporating this into my final project, 
-            which will use php and a mysql database to access the cruise database information. 
+      <div class="jumbotron">
+         <h2>Oceanographic Cruise Finder</h2>
+         <p>This is a tool developed to filter a set of cruises by any of the criteria on the left panel.  
          </p>
-      </div>-->
+      </div>
       <h3>Search Criteria </h3>
       <div class="row">
          <div class="col-md-3">
@@ -122,7 +121,15 @@
             </div>
          </div>
       </div>
+      
+      <div class = "well"> Features to implement for P4: <br>
+      <li>The functionality of the "Get Cruise Data" buttons (get data from server) </li>
+      <li>Store data in SQL database instead of data.js file</li>
+      <li> Ability to submit data as well as retrieve data</li>  
+       </div>
       </div>
+      
+      
       
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
